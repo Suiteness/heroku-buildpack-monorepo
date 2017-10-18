@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -x
+
 indent() {
     sed -u 's/^/      /'
 }
@@ -15,6 +17,7 @@ fi
 APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
 
 (
+    ls -l "${BUILD_DIR}" &&
     mv "${BUILD_DIR}/core" "${STAGE}" &&
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
     shopt -s dotglob nullglob &&
@@ -30,4 +33,3 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Copied ${APP_BASE} to root of app successfully" | indent
-
