@@ -23,7 +23,7 @@ APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
     shopt -s dotglob nullglob &&
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
-    mkdir -p "${BUILD_DIR}"/checkouts &&
+    rm -rf "${BUILD_DIR}"/checkouts/core &&
     mv -f "${STAGE}"/core "${BUILD_DIR}"/checkouts
 )
 
