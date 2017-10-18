@@ -15,10 +15,13 @@ fi
 APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
 
 (
+    mv "${BUILD_DIR}/core" "${STAGE}" &&
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
     shopt -s dotglob nullglob &&
     rm -rf "${BUILD_DIR}"/* &&
-    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
+    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
+    mkdir "${BUILD_DIR}"/checkouts &&
+    mv -f "${STAGE}/core "${BUILD_DIR}"/checkouts
 )
 
 if [ $? -ne 0 ]; then
